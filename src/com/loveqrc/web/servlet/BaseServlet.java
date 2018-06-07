@@ -1,11 +1,14 @@
 package com.loveqrc.web.servlet;
 
+import com.loveqrc.domain.Category;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.lang.reflect.Method;
+import java.util.List;
 
 public class BaseServlet extends HttpServlet {
 
@@ -25,6 +28,7 @@ public class BaseServlet extends HttpServlet {
             String isDispatcher = (String) method.invoke(this, req, resp);
 
             if (isDispatcher != null) {
+                List<Category> clist = (List<Category>) req.getAttribute("clist");
                 req.getRequestDispatcher(isDispatcher).forward(req, resp);
             }
 
